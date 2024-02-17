@@ -1,0 +1,37 @@
+{
+    "title": "Once upon a time...",
+    "nodes": [
+        {
+            "type": "text",
+            "content": "Once upon a time..."
+        },
+        {
+            "type": "section",
+            "content": {
+                "title": "chapter one",
+                "nodes": [
+                    {
+                        "type": "text",
+                        "content": "Once upon a time"
+                    },
+                    {
+                        "type": "text",
+                        "content": "there was a tree"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "section",
+            "content": {
+                "title": "chapter two",
+                "nodes": [
+                    {
+                        "type": "text",
+                        "content": "The next day..."
+                    }
+                ]
+            }
+        }
+    ]
+}

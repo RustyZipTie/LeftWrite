@@ -1,11 +1,15 @@
 import React from "react";
+import quill from '../app/assets/quill.svg';
 
-const LandingPage = () =>{
-    return(
+const LandingPage = () => {
+    return (
         <div>
-            Landing Page<br/>
-            <a href="/login">Login</a><br/>
-            <a href="/editor">Editor</a>
+            <h1>
+                <img src={quill} alt="logo"></img>
+                LeftWrite
+            </h1>
+            <a className="navlink" href="/login">Login</a>
+            <a className="navlink" href="/editor">Editor</a>
         </div>
     );
 };
