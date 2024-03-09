@@ -16,11 +16,11 @@ const Editor = ({ document }) => {
     }
     return (
         <>
-            <div className="editor">
+            <div className="editor thing">
                 <textarea
                     rows={1}
                     onInput={save}
-
+                    className="thing"
                 >{title}</textarea>
                 {
                     nodes.map((node, idx) => {
@@ -34,6 +34,7 @@ const Editor = ({ document }) => {
                                             rows={lines(node.content)}
                                             onInput={save}
                                             id='txt'
+                                            className="thing"
                                         >{node.content}</textarea>
                                     </>
                                 );
@@ -47,8 +48,8 @@ const Editor = ({ document }) => {
                         }
                     })
                 }
-                <button onClick={() => document.nodes.push({ title: '', type: 'section', content: {} })}>new section</button>
-                <button onClick={() => document.nodes.push({ title: '', type: 'text', content: '' })}>new text</button>
+                <button className='thing' onClick={() => document.nodes.push({ title: '', type: 'section', content: {} })}>new section</button>
+                <button className='thing' onClick={() => document.nodes.push({ title: '', type: 'text', content: '' })}>new text</button>
             </div>
         </>
 

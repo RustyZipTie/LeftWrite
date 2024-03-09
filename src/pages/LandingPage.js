@@ -4,12 +4,12 @@ import quill from '../app/assets/quill.svg';
 const LandingPage = () => {
     return (
         <div>
-            <h1>
+            <h1 className="thing">
                 <img src={quill} alt="logo"></img>
                 LeftWrite
             </h1>
-            <a className="navlink" href="/login">Login</a>
-            <a className="navlink" href="/editor">Editor</a>
+            <a className="navlink thing" href="/login">Login</a>
+            <a className="navlink thing" href="/editor">Editor</a>
         </div>
     );
 };

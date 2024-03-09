@@ -1,11 +1,9 @@
-import React from "react";
-import Editor from "../components/Editor";
-
-const EditingPage = () => {
-
-    return (
-        <>
-            <Editor document={{
+export const db = [
+    {
+        id: 'default',
+        password: '',
+        documents: [
+            {
                 title: 'the linguist',
                 nodes: [
                     {
@@ -29,9 +27,7 @@ const EditingPage = () => {
                         }
                     }
                 ]
-            }} />
-        </>
-    );
-};
-
-export default EditingPage;
+            }
+        ]
+    }
+]

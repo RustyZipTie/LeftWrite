@@ -25,8 +25,10 @@ const documentsSlice = createSlice({
             state.activeDocument = action.payload;
             console.log('active:', state.activeDocument);
         },
-        updateActive: (state, action)
+        updateActive: (state, action) => {}
     }
 });
 
-export const selectAllDocuments = () => state.documents.documentsArray;
+export const documentsReducer = documentsSlice.reducer;
+
+export const selectAllDocuments = (state) => state.documents.documentsArray;
