@@ -1,5 +1,6 @@
 
 import React from 'react'
+import User from '../features/user/User'
 
 const style = {
     height: 'fit-content',
@@ -12,6 +13,7 @@ function Header() {
   return (
     <div className='header thing'>
         <a className='navlink thing' href='/'>Home</a>
+        <User />
     </div>
   )
 }

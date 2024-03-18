@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    documentsArray: [],
-    activeDocument: null
+
 };
 
 const documentsSlice = createSlice({
