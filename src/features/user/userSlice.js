@@ -34,14 +34,14 @@ export const postUser = createAsyncThunk(
     async (user, { dispatch }, state) => {
         console.log(user);
         console.log(JSON.stringify(user));
-        await dispatch(fetchUsernames());
-        if(!state.user.usernames.includes(user.username)) {
+        //await dispatch(fetchUsernames());
+        //if(!state.user.usernames.includes(user.username)) {
             //post user
             const response = await fetch(
                 baseURL+'/users/', 
                 {
                     method: 'POST',
-                    body: JSON.stringify(user),
+                    body: user,
                     headers: {'Content-Type': 'application/json'}
                 }
             );
@@ -56,14 +56,14 @@ export const postUser = createAsyncThunk(
                 baseURL+'/usernames/', 
                 {
                     method: 'POST',
-                    body: JSON.stringify(user.username),
+                    body: user.username,
                     headers: {'Content-Type': 'application/json'}
                 }
             );
             if (!response2.ok){
                 return Promise.reject(response2.status);
             }
-        }
+        //}
     }
 )
 
