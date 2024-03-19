@@ -48,8 +48,8 @@ export const postUser = createAsyncThunk(
             if (!response.ok){
                 return Promise.reject(response.status);
             }
-            const data = await response.json();
-            dispatch(userSlice.actions.setUser(data));
+            // const data = await response.json();
+            // dispatch(userSlice.actions.setUser(data));
 
             //post username
             const response2 = await fetch(
@@ -111,6 +111,21 @@ const userSlice = createSlice({
         [fetchUser.rejected]: (state, action) => {
             state.namesLoading = false;
             state.errMsg = action.error ? action.error.message : 'Usernames Fetch failed';
+            console.error(state.errMsg);
+        },
+
+        //post user
+        [postUser.pending]: state => {
+            state.userLoading = true;
+        },
+        [postUser.fulfilled]: (state, action) => {
+            state.userLoading = false;
+            state.errMsg = '';
+            state.user = action.payload;
+        },
+        [postUser.rejected]: (state, action) => {
+            state.namesLoading = false;
+            state.errMsg = action.error ? action.error.message : 'User post failed';
             console.error(state.errMsg);
         }
     }
