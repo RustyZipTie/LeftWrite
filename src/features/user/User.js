@@ -3,17 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postUser } from './userSlice';
 
 const User = () => {
+    const [SIopen, setSIopen] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
     const user = useSelector(state => state.user);
     const dispatch = useDispatch()
 
     const Account = () => {
-        return <div className='navlink thing'>{user.username}</div>
+        console.log(user);
+        return <div className='navlink thing'>{loggedIn}</div>
     }
 
     const SingnIn = () => {
         return (<div style={{ display: 'flex', flexDirection: 'row' }}>
-            <div className='navlink thing' onClick={() => document.querySelector('#signup').showModal()}>Sign Up</div>
-            <div className='navlink thing' onClick={() => document.querySelector('#login').showModal()}>Log In</div>
+            <div className='navlink thing' onClick={() => setSIopen(true)}>Sign Up</div>
+            <div className='navlink thing' onClick={() => {
+
+            }}>Log In</div>
         </div>)
     }
 
@@ -22,23 +27,29 @@ const User = () => {
             <div
                 className='navlink thing'
             >{
-                    user.username ? (<Account />) : (<SingnIn />)
+                    loggedIn ? (<Account />) : (<SingnIn />)
                 }</div>
-            <dialog id='signup'>
-                <h2>Sign Up</h2><br/>
+            {SIopen && <dialog open>
+                <h2>Sign Up</h2><br />
                 <p>Username:</p>
-                <input id='username' placeholder='username' /><br/>
+                <input id='username' placeholder='username' /><br />
                 <p>Password (if none provided, then account will be public):</p>
-                <input id='password' placeholder='password' /><br/>
+                <input id='password' placeholder='password' /><br />
                 <div className='navlink thing' onClick={() => {
                     dispatch(postUser({
-                        id: document.querySelector('#username').value,
-                        password: document.querySelector('#password').value,
-                        documents: []
+                        user: {
+                            id: document.querySelector('#username').value,
+                            password: document.querySelector('#password').value,
+                            documents: []
+                        },
+                        setLoggedIn
                     }));
-                    document.querySelector('#signup').close();
+                    setSIopen(false);
                 }}>Submit</div>
-            </dialog>
+                <div className='navlink thing' onClick={() => {
+                    setSIopen(false);
+                }}>Cancel</div>
+            </dialog>}
             <dialog id='login'>Log In</dialog>
             <dialog id='profile'>{user.username}</dialog>
         </>
