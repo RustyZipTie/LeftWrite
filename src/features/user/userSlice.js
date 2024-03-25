@@ -41,6 +41,7 @@ const initialState = {
     nameStaus: '',
     usernames: [],
     user: {},
+    loggedIn: false,
     errMsg: ''
 };
 
@@ -50,6 +51,8 @@ const userSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             state.user.user = action.payload.data;
+            state.user.loggedIn = true;
+            window.localStorage.setItem('user', state.user);
             action.payload.setLoggedIn(state.user.user.id);
             console.log(state.user.user);
         }

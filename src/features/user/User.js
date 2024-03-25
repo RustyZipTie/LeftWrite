@@ -8,6 +8,18 @@ const User = () => {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch()
 
+    const handleSignIn = () => {
+        dispatch(postUser({
+            user: {
+                id: document.querySelector('#username').value,
+                password: document.querySelector('#password').value,
+                documents: []
+            },
+            setLoggedIn
+        }));
+        setSIopen(false);
+    }
+
     const Account = () => {
         console.log(user);
         return <div className='navlink thing'>{loggedIn}</div>
@@ -26,29 +38,37 @@ const User = () => {
         <>
             <div
                 className='navlink thing'
+                style={{
+                    float: 'right'
+                }}
             >{
                     loggedIn ? (<Account />) : (<SingnIn />)
                 }</div>
             {SIopen && <dialog open>
                 <h2>Sign Up</h2><br />
                 <p>Username:</p>
-                <input id='username' placeholder='username' /><br />
+                <input
+                    id='username'
+                    placeholder='username'
+                    onKeyPress={e => e.key === "Enter" ? handleSignIn() : {}}
+                /><br />
                 <p>Password (if none provided, then account will be public):</p>
-                <input id='password' placeholder='password' /><br />
-                <div className='navlink thing' onClick={() => {
-                    dispatch(postUser({
-                        user: {
-                            id: document.querySelector('#username').value,
-                            password: document.querySelector('#password').value,
-                            documents: []
-                        },
-                        setLoggedIn
-                    }));
-                    setSIopen(false);
-                }}>Submit</div>
-                <div className='navlink thing' onClick={() => {
-                    setSIopen(false);
-                }}>Cancel</div>
+                <input
+                    id='password'
+                    placeholder='password'
+                    onKeyPress={e => e.key === "Enter" ? handleSignIn() : {}}
+                /><br />
+                <div className='navlink thing' onClick={handleSignIn}>Submit</div>
+                <div
+                    className='navlink thing'
+                    style={{
+                        position: 'absolute',
+                        top: 10, right: 10
+                    }}
+                    onClick={() => {
+                        setSIopen(false);
+                    }}
+                >X</div>
             </dialog>}
             <dialog id='login'>Log In</dialog>
             <dialog id='profile'>{user.username}</dialog>
