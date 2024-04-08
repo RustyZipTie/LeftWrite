@@ -18,11 +18,9 @@ const documentsSlice = createSlice({
                     }
                 ]
             });
-            console.log('docs arr', state.documentsArray);
         },
         setActive: (state, action) => {
             state.activeDocument = action.payload;
-            console.log('active:', state.activeDocument);
         },
         updateActive: (state, action) => {}
     }

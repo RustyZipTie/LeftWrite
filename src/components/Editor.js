@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 
 const Editor = ({ document }) => {
     const { title, nodes } = document;
@@ -12,7 +12,6 @@ const Editor = ({ document }) => {
     const save = e => {
         //do something with value
         e.target.rows = lines(e.target.value);
-        console.log(e.target.value);
     }
     return (
         <>

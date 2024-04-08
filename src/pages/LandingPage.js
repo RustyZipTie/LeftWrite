@@ -1,29 +1,16 @@
-import useSelector from "react";
+import { useSelector } from "react-redux";
 import quill from '../app/assets/quill.svg';
 
 const LandingPage = () => {
+    const user = useSelector(state => state.user);
 
-    
 
     return (
-        <div>
-            <h1
-                className="thing"
-                style={{
-                    width: "fit-content",
-                    margin: "auto"
-                }}
-            >
-                <img
-                    src={quill}
-                    alt="logo"
-                    className="navlink thing"
-                ></img>
-                LeftWrite
-            </h1>
-
-            <a className="navlink thing" href="/editor">Editor</a>
-        </div>
+        user.loggedIn ? (
+            <div>welcome!</div>
+        ) : (
+            <div>You should use this really awesome web app!</div>
+        )
     );
 };
 

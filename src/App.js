@@ -10,10 +10,7 @@ function App() {
   const dispatch = useDispatch();
   
   useEffect(() =>{
-    const user = JSON.parse(window.localStorage.getItem('user'));
-    if (user) {
-      dispatch()
-    }
+
   })
 
   return (

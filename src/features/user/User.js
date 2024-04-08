@@ -1,37 +1,48 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { postUser } from './userSlice';
+import { fetchUser, postUser } from './userSlice';
 
 const User = () => {
-    const [SIopen, setSIopen] = useState('');
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [SIopen, setSIopen] = useState(false);
+    const [SIunVal, setSIunVal] = useState('');
+    const [SIpwVal, setSIpwVal] = useState('');
+
+    const [LIopen, setLIopen] = useState(false);
+    const [LIunVal, setLIunVal] = useState('');
+    const [LIpwVal, setLIpwVal] = useState('');
+
     const user = useSelector(state => state.user);
     const dispatch = useDispatch()
 
     const handleSignIn = () => {
-        dispatch(postUser({
-            user: {
-                id: document.querySelector('#username').value,
-                password: document.querySelector('#password').value,
-                documents: []
-            },
-            setLoggedIn
-        }));
+        const newUser = {
+            id: SIunVal,
+            password: SIpwVal,
+            documents: []
+        };
+        dispatch(postUser(newUser));
         setSIopen(false);
     }
 
+    const handleLogIn = () => {
+        dispatch(fetchUser({
+            username: LIunVal, 
+            password: LIpwVal
+        }));
+        setLIopen(false);
+    }
+
     const Account = () => {
-        console.log(user);
-        return <div className='navlink thing'>{loggedIn}</div>
+        return <div className='navlink thing'>{user.user.id}</div>
     }
 
     const SingnIn = () => {
-        return (<div style={{ display: 'flex', flexDirection: 'row' }}>
-            <div className='navlink thing' onClick={() => setSIopen(true)}>Sign Up</div>
-            <div className='navlink thing' onClick={() => {
-
-            }}>Log In</div>
-        </div>)
+        return (
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div className='navlink thing' onClick={() => setSIopen(true)}>Sign Up</div>
+                <div className='navlink thing' onClick={() => setLIopen(true)}>Log In</div>
+            </div>
+        )
     }
 
     return (
@@ -42,20 +53,30 @@ const User = () => {
                     float: 'right'
                 }}
             >{
-                    loggedIn ? (<Account />) : (<SingnIn />)
+                    user.userLoading ? (
+                        <div>Loading...</div>
+                    ) : user.loggedIn ? (
+                        <Account />
+                    ) : (
+                        <SingnIn />
+                    )
                 }</div>
             {SIopen && <dialog open>
                 <h2>Sign Up</h2><br />
                 <p>Username:</p>
                 <input
                     id='username'
+                    value={SIunVal}
                     placeholder='username'
+                    onChange={e => setSIunVal(e.target.value)}
                     onKeyPress={e => e.key === "Enter" ? handleSignIn() : {}}
                 /><br />
                 <p>Password (if none provided, then account will be public):</p>
                 <input
                     id='password'
+                    value={SIpwVal}
                     placeholder='password'
+                    onChange={e => setSIpwVal(e.target.value)}
                     onKeyPress={e => e.key === "Enter" ? handleSignIn() : {}}
                 /><br />
                 <div className='navlink thing' onClick={handleSignIn}>Submit</div>
@@ -67,6 +88,36 @@ const User = () => {
                     }}
                     onClick={() => {
                         setSIopen(false);
+                    }}
+                >X</div>
+            </dialog>}
+            {LIopen && <dialog open>
+                <h2>Log In</h2><br />
+                <p>Username:</p>
+                <input
+                    id='username'
+                    value={LIunVal}
+                    placeholder='username'
+                    onChange={e => setLIunVal(e.target.value)}
+                    onKeyPress={e => e.key === "Enter" ? handleLogIn() : {}}
+                /><br />
+                <p>Password (if none provided, then account will be public):</p>
+                <input
+                    id='password'
+                    value={LIpwVal}
+                    onChange={e => setLIpwVal(e.target.value)}
+                    placeholder='password'
+                    onKeyPress={e => e.key === "Enter" ? handleLogIn() : {}}
+                /><br />
+                <div className='navlink thing' onClick={handleLogIn}>Submit</div>
+                <div
+                    className='navlink thing'
+                    style={{
+                        position: 'absolute',
+                        top: 10, right: 10
+                    }}
+                    onClick={() => {
+                        setLIopen(false);
                     }}
                 >X</div>
             </dialog>}
