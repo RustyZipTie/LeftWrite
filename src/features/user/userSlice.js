@@ -3,7 +3,7 @@ import baseURL from "../../app/shared/baseUrl";
 
 export const fetchUser = createAsyncThunk(
     'user/fetchUser',
-    async ({username, password}, state) => {
+    async ({ username, password }, state) => {
         const response = await fetch(baseURL + 'users/' + username);
         if (!response.ok) {
             return Promise.reject('Unable to fetch, status: ' + response.status);
@@ -48,7 +48,12 @@ const initialState = {
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        logOut: (state, action) => {
+            state.user = {};
+            state.loggedIn = false;
+        }
+    },
     extraReducers: {
 
         //fetch user
@@ -90,5 +95,7 @@ const userSlice = createSlice({
 
     }
 });
+
+export const { logOut } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

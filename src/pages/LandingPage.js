@@ -7,7 +7,21 @@ const LandingPage = () => {
 
     return (
         user.loggedIn ? (
-            <div>welcome!</div>
+            <div 
+                className="thing"
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap'
+                }}
+            >
+                <button className="navlink thing">+ New Document</button>
+                {user.user.documents[0] && (
+                    user.user.documents.map((doc, idx) => {
+                        return <div className="navlink thing">{doc.id}</div>
+                    })
+                )}
+            </div>
         ) : (
             <div>You should use this really awesome web app!</div>
         )
