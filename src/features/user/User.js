@@ -66,16 +66,20 @@ const User = () => {
                         <SingnIn />
                     )
                 }</div>
-            {SIopen && <div
-                style={{
-                    position: 'fixed',
-                    height: '100%',
-                    width: '100%',
-                    zIndex: 30
+            {SIopen && <>
+                <div
+                    style={{
+                        position: 'fixed',
+                        height: '100%',
+                        width: '100%',
+                        zIndex: 30
+                    }}
+                    onClick={() => setSIopen(false)}
+                ></div>
+                <dialog open style={{
+                    zIndex: 31
                 }}
-                onClick={() => setSIopen(false)}
-            >
-                <dialog open>
+                >
                     <h2>Sign Up</h2><br />
                     <p>Username:</p>
                     <input
@@ -105,17 +109,18 @@ const User = () => {
                         }}
                     >X</div>
                 </dialog>
-            </div>}
-            {LIopen && <div
-                style={{
-                    position: 'fixed',
-                    height: '100%',
-                    width: '100%',
-                    zIndex: 30
-                }}
-                onClick={() => setLIopen(false)}
-            >
-                <dialog open>
+            </>}
+            {LIopen && <>
+                <div
+                    style={{
+                        position: 'fixed',
+                        height: '100%',
+                        width: '100%',
+                        zIndex: 30
+                    }}
+                    onClick={() => setLIopen(false)}
+                ></div>
+                <dialog open style={{ zIndex: 31 }}>
                     <h2>Log In</h2><br />
                     <p>Username:</p>
                     <input
@@ -145,17 +150,18 @@ const User = () => {
                         }}
                     >X</div>
                 </dialog>
-            </div>}
-            {userOpen && <div
-                style={{
-                    position: 'fixed',
-                    height: '100%',
-                    width: '100%',
-                    zIndex: 30
-                }}
-                onClick={() => setUserOpen(false)}
-            >
-                <dialog open>
+            </>}
+            {userOpen && <>
+                <div
+                    style={{
+                        position: 'fixed',
+                        height: '100%',
+                        width: '100%',
+                        zIndex: 30
+                    }}
+                    onClick={() => setUserOpen(false)}
+                ></div>
+                <dialog open style={{ zIndex: 31 }}>
                     <h2>{user.user.id}</h2><br />
                     <button
                         className='navlink thing'
@@ -174,8 +180,8 @@ const User = () => {
                             setUserOpen(false);
                         }}
                     >X</div>
-                </dialog>
-            </div>}
+                </dialog>ß
+            </>}
             <dialog id='login'>Log In</dialog>
             <dialog id='profile'>{user.username}</dialog>
         </>

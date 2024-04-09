@@ -1,7 +1,11 @@
 import React from "react";
 import Editor from "../components/Editor";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 const EditingPage = () => {
+    const docId = useParams();
+    const doc = useSelector(state => state.user.user.documents.find(val => val.id = docId));
 
     return (
         <>
