@@ -8,9 +8,15 @@ const LandingPage = () => {
     const [NDopen, setNDopen] = useState(false);
     const [NDtitle, setNDtitle] = useState('');
 
+    const handleSubmit = () => {
+        console.log(NDtitle);
+        setNDtitle('');
+        setNDopen(false);
+    }
+
     return (
         <>
-            {/* {NDopen && <>
+            {NDopen && <>
                 <div
                     style={{
                         position: 'fixed',
@@ -25,12 +31,12 @@ const LandingPage = () => {
                     <p>Title:</p>
                     <input
                         id='username'
-                        value={LIunVal}
-                        placeholder='username'
-                        onChange={e => setLIunVal(e.target.value)}
-                        onKeyPress={e => e.key === "Enter" ? handleLogIn() : {}}
+                        value={NDtitle}
+                        placeholder='Title'
+                        onChange={e => setNDtitle(e.target.value)}
+                        onKeyPress={e => e.key === "Enter" ? handleSubmit() : {}}
                     /><br />
-                    <div className='navlink thing' onClick={handleLogIn}>Submit</div>
+                    <div className='navlink thing' onClick={handleSubmit}>Submit</div>
                     <div
                         className='navlink thing'
                         style={{
@@ -38,11 +44,11 @@ const LandingPage = () => {
                             top: 10, right: 10
                         }}
                         onClick={() => {
-                            setLIopen(false);
+                            setNDopen(false);
                         }}
                     >X</div>
                 </dialog>
-            </>} */}
+            </>}
             {user.loggedIn ? (
                 <div
                     className="thing"
@@ -65,6 +71,7 @@ const LandingPage = () => {
             ) : (
                 <div>You should use this really awesome web app!</div>
             )}
+            <a href='/editor'>editor</a>
         </>
     );
 };
